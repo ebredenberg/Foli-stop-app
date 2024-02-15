@@ -27,7 +27,6 @@ function App() {
     Axios.get('https://data.foli.fi/siri/sm/' + selectedStop)
     .then((res) => {
       setCurrentStopData(res.data);
-      console.log(res.data);
     })
 
     const selectedStopName = stopList[selectedStop]?.stop_name;
