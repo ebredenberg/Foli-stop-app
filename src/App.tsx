@@ -13,7 +13,7 @@ function App() {
 
   const [stopList, setStopList] = useState<StopList>({});
   const [selectedStop, setSelectedStop] = useState<string>("");
-  const [currentStopData, setCurrentStopData] = useState<StopData>({});
+  const [currentStopData, setCurrentStopData] = useState<StopData | null>(null);
   const [currentDisplayStop, setCurrentDisplayStop] = useState<string>("");
 
   useEffect(() => {
@@ -98,14 +98,14 @@ function App() {
             </TableHead>
             <TableBody>
             {
-              currentStopData.result ? (
-              currentStopData.result.map((stop) => (
-                <TableRow key={stop.datedvehiclejourneyref} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                  <TableCell>{stop.lineref}</TableCell>
-                  <TableCell>{stop.destinationdisplay}</TableCell>
-                  <TableCell>{timeFormatter(stop.expectedarrivaltime)}</TableCell>
-                </TableRow>
-              ))
+              currentStopData?.result ? (
+                currentStopData?.result.map((stop) => (
+                  <TableRow key={stop.datedvehiclejourneyref} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                    <TableCell>{stop.lineref}</TableCell>
+                    <TableCell>{stop.destinationdisplay}</TableCell>
+                    <TableCell>{timeFormatter(stop.expectedarrivaltime)}</TableCell>
+                  </TableRow>
+                ))
               ) : (
                 <TableRow>
                   <TableCell>Pysäkkiä ei löydy tai pysäkkiä ei ole olemassa</TableCell>
